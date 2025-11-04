@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Chat App</title>
+  <title>Chat APP</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     :root{
@@ -39,215 +39,77 @@
       box-shadow: 0 8px 30px rgba(16,24,40,0.08);
     }
 
-    /* Left column - users */
     .left {
       width: 280px;
-      min-width: 260px;
       background: var(--panel);
       padding: 20px;
-      border-right: 1px solid rgba(0,0,0,0.04);
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+      display:flex;flex-direction:column;gap:14px;
+      border-right:1px solid rgba(0,0,0,0.04);
     }
 
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-      color:var(--primary);
-      font-size:18px;
-    }
+    .brand {display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:18px}
     .brand .logo {
-      width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#3560d2);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
-      box-shadow: 0 6px 18px rgba(74,108,247,0.15);
+      width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#3560d2);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
     }
 
-    .search {
-      margin-top:6px;
-    }
     .search input{
-      width:100%;
-      padding:10px 12px;
-      border-radius:10px;border:1px solid rgba(16,24,40,0.06);
-      outline:none;background:transparent;color:var(--text);
+      width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.1);
+      background:transparent;color:var(--text);
     }
 
-    .usersTitle { color:var(--primary); font-weight:700; margin-top:6px; font-size:15px; }
-    .usersList {
-      margin-top:8px;
-      overflow:auto;
-      padding-right:6px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
+    .usersList {margin-top:10px;overflow:auto;display:flex;flex-direction:column;gap:10px}
 
-    .user {
-      background: linear-gradient(180deg, rgba(0,0,0,0.01), rgba(255,255,255,0.02));
-      border-radius:12px;
-      padding:10px;
-      display:flex;
-      gap:12px;
-      align-items:center;
-      cursor:pointer;
-      border:1px solid rgba(0,0,0,0.03);
-      transition:all .14s ease;
-    }
-    .user:hover{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(16,24,40,0.04)}
+    .user {display:flex;gap:12px;padding:10px;border-radius:12px;cursor:pointer;
+      border:1px solid rgba(0,0,0,0.06);background:var(--panel);}
     .avatar {
-      width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#eef2ff,var(--primary));display:flex;align-items:center;justify-content:center;font-weight:700;color:white;
-    }
-    .user .meta {flex:1}
-    .user .meta .name {font-weight:700;color:var(--text)}
-    .user .meta .desc {font-size:13px;color:var(--muted);margin-top:4px}
-
-    /* Right - chat area */
-    .right {
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
+      width:44px;height:44px;border-radius:12px;background:var(--primary);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
     }
 
-    .header {
-      height:72px;
-      background:var(--primary);
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 20px;
-      border-bottom-left-radius:8px;
-    }
-    .header .title {display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
-    .header .controls {display:flex;align-items:center;gap:10px}
+    .right {flex:1;display:flex;flex-direction:column;background:var(--panel)}
 
-    .chatArea {
-      flex:1;
-      padding:28px;
-      overflow:auto;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-    }
+    .header {height:70px;background:var(--primary);color:white;display:flex;align-items:center;
+      justify-content:space-between;padding:0 20px;font-weight:700;}
 
-    .messages {
-      width:100%;
-      max-width:760px;
-      margin:0 auto;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
+    .chatArea {flex:1;overflow:auto;padding:20px;}
+    .messages {display:flex;flex-direction:column;gap:12px}
 
-    .msg {
-      display:inline-block;
-      padding:12px 16px;
-      border-radius:14px;
-      font-size:15px;
-      line-height:1.25;
-      word-break:break-word;
-      box-shadow: 0 6px 18px rgba(16,24,40,0.04);
-      max-width:70%;
-    }
+    .msg {max-width:70%;padding:12px 16px;border-radius:14px;font-size:15px}
+    .msg.self {align-self:flex-end;background:var(--msg-self);color:white}
+    .msg.other {align-self:flex-start;background:var(--msg-other);color:var(--text)}
 
-    .msg.other {
-      align-self:flex-start;
-      background:var(--msg-other);
-      color:var(--text);
-      border-bottom-left-radius:6px;
-    }
-    .msg.self {
-      align-self:flex-end;
-      background:var(--msg-self);
-      color:#fff;
-      border-bottom-right-radius:6px;
-    }
+    .msg .meta {font-size:12px;color:var(--muted);margin-bottom:6px}
 
-    .msg .meta {
-      font-size:12px;color:var(--muted);margin-bottom:6px;
+    .footer {display:flex;gap:10px;padding:12px;background:var(--panel);
+      border-top:1px solid rgba(0,0,0,0.06);}
+    .footer input{
+      flex:1;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);
+      background:transparent;color:var(--text)
     }
+    .btn {padding:10px 16px;border:none;border-radius:12px;background:var(--primary);color:white;font-weight:700;cursor:pointer}
+    .small {padding:8px 12px;background:transparent;border-radius:10px;border:1px solid rgba(0,0,0,0.06);cursor:pointer}
 
-    .footer {
-      padding:14px 20px;
-      display:flex;
-      gap:12px;
-      align-items:center;
-      border-top:1px solid rgba(0,0,0,0.04);
-      background:var(--panel);
-    }
-    .input {
-      flex:1; display:flex; gap:8px; align-items:center;
-    }
-    .input input{
-      width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);outline:none;background:transparent;color:var(--text);
-    }
-    .btn {
-      padding:10px 14px;border-radius:12px;border:none;background:var(--primary);color:white;cursor:pointer;font-weight:700;
-    }
-    .small {
-      padding:8px 10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text);cursor:pointer;
-    }
-
-    .typing {
-      padding:0 20px 6px 20px;color:var(--muted);font-size:13px;height:18px;
-    }
-
-    /* Modals */
-    .modal-backdrop{
-      position:fixed;inset:0;background:rgba(2,6,23,0.45);display:none;align-items:center;justify-content:center;z-index:30;
-    }
-    .modal {
-      width:360px;background:var(--panel);padding:18px;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.4);
-      color:var(--text);
-    }
-    .modal h3{margin:0 0 8px 0}
-    .modal .row{display:flex;gap:8px;margin-top:10px}
-    .modal input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);}
-
-    /* responsive */
-    @media (max-width:900px){
-      .left{display:none}
-      .app{max-width:100%;height:100vh;margin:0}
-    }
-
-    /* scroll aesthetics */
-    .usersList::-webkit-scrollbar, .chatArea::-webkit-scrollbar{width:8px;height:8px}
-    .usersList::-webkit-scrollbar-thumb, .chatArea::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.08);border-radius:8px}
+    .typing {padding:0 20px;color:var(--muted);height:20px;font-size:14px}
   </style>
 </head>
+
 <body>
 
-<div class="app" id="app" data-theme="light">
+<div class="app">
   <div class="left">
-    <div class="brand">
-      <div class="logo">C</div>
-      <div>Chat Modern</div>
-    </div>
+    <div class="brand"><div class="logo">C</div>Chat Modern</div>
 
-    <div class="search">
-      <input id="searchUsers" placeholder="Search users..." />
-    </div>
+    <div class="search"><input placeholder="Search..." /></div>
 
-    <div class="usersTitle">Online Users</div>
     <div class="usersList" id="usersList"></div>
-
-    <div style="margin-top:auto;font-size:13px;color:var(--muted)">
-      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
-        <div>Theme</div>
-        <div>
-          <button id="toggleTheme" class="small">Dark</button>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="right">
+
     <div class="header">
-      <div class="title"><span style="font-size:20px">💬</span> <span id="roomTitle">Chat Room</span></div>
-      <div class="controls">
-        <div id="currentUser" style="color:rgba(255,255,255,0.95);font-weight:700"></div>
-      </div>
+      <div>💬 Chat Room</div>
+      <div id="currentUser"></div>
     </div>
 
     <div class="chatArea" id="chatArea">
@@ -257,337 +119,106 @@
     <div class="typing" id="typing"></div>
 
     <div class="footer">
-      <div class="input">
-        <input id="messageInput" placeholder="Write a message..." autocomplete="off" />
-      </div>
+      <input id="messageInput" placeholder="Write a message..." />
       <button id="sendBtn" class="btn">Send</button>
       <button id="dmBtn" class="small">DM</button>
     </div>
-  </div>
-</div>
 
-<!-- Modals -->
-<div class="modal-backdrop" id="backdrop">
-  <div class="modal" id="modal">
-    <h3 id="modalTitle">Modal</h3>
-    <div id="modalBody">
-      <input id="modalInput" placeholder="Type..." />
-      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
-        <button id="modalCancel" class="small">Cancel</button>
-        <button id="modalOk" class="btn">Send</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- One-time message view modal -->
-<div class="modal-backdrop" id="oneBackdrop">
-  <div class="modal" id="oneModal">
-    <h3>Secret message</h3>
-    <div id="oneContent" style="padding:8px 0;color:var(--muted)"></div>
-    <div style="display:flex;justify-content:flex-end;margin-top:12px">
-      <button id="oneClose" class="btn">Close (destroy)</button>
-    </div>
   </div>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  // -------------------------
-  // Client side logic (front)
-  // -------------------------
-  const socket = io();
 
-  // prompt username (modal-like)
-  let username = '';
-  while(!username){
-    username = prompt('Choose a username (no spaces recommended):') || '';
-    username = username.trim();
-  }
+  // Connect automatically to local OR Ngrok
+  const socket = io(window.location.origin);
 
-  document.getElementById('currentUser').textContent = username;
-  socket.emit('register', username);
+  // Ask for username
+  let username = "";
+  while (!username) username = prompt("Choose username:")?.trim();
+  document.getElementById("currentUser").textContent = username;
 
-  // theme toggle
-  const app = document.getElementById('app');
-  const themeBtn = document.getElementById('toggleTheme');
-  let theme = 'light';
-  themeBtn.onclick = () => {
-    theme = theme === 'light' ? 'dark' : 'light';
-    app.setAttribute('data-theme', theme);
-    themeBtn.textContent = theme === 'light' ? 'Dark' : 'Light';
-  };
+  socket.emit("register", username);
 
-  // elements
-  const usersListEl = document.getElementById('usersList');
-  const messagesEl = document.getElementById('messages');
-  const messageInput = document.getElementById('messageInput');
-  const sendBtn = document.getElementById('sendBtn');
-  const dmBtn = document.getElementById('dmBtn');
-  const typingEl = document.getElementById('typing');
-  const chatArea = document.getElementById('chatArea');
+  const usersListEl = document.getElementById("usersList");
+  const messagesEl = document.getElementById("messages");
+  const messageInput = document.getElementById("messageInput");
+  const typingEl = document.getElementById("typing");
+  const chatArea = document.getElementById("chatArea");
 
-  // modal controls
-  const backdrop = document.getElementById('backdrop');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalInput = document.getElementById('modalInput');
-  const modalOk = document.getElementById('modalOk');
-  const modalCancel = document.getElementById('modalCancel');
-  const oneBackdrop = document.getElementById('oneBackdrop');
-  const oneContent = document.getElementById('oneContent');
-  const oneClose = document.getElementById('oneClose');
+  // Display online users
+  socket.on("onlineUsers", (users) => {
+    usersListEl.innerHTML = "";
 
-  // state
-  let onlineUsers = [];
-  let currentDM = null; // username to DM
-  let typingTimeout = null;
-
-  // UTIL: avatar initials color
-  function avatarText(name){
-    const parts = name.split(' ');
-    if(parts.length === 1) return name.slice(0,2).toUpperCase();
-    return (parts[0][0] + parts[1][0]).toUpperCase();
-  }
-
-  // add user list
-  socket.on('onlineUsers', (users) => {
-    onlineUsers = users;
-    renderUsers(users);
-  });
-
-  function renderUsers(users){
-    usersListEl.innerHTML = '';
-    const filtered = users.filter(u => u !== username).sort();
-    filtered.forEach(u => {
-      const div = document.createElement('div');
-      div.className = 'user';
+    users.filter(u => u !== username).forEach(u => {
+      const div = document.createElement("div");
+      div.className = "user";
       div.innerHTML = `
-        <div class="avatar">${avatarText(u)}</div>
-        <div class="meta">
-          <div class="name">${u}</div>
-          <div class="desc">Online</div>
-        </div>
+        <div class="avatar">${u.slice(0,2).toUpperCase()}</div>
+        <div class="meta"><div class="name">${u}</div><div class="desc">Online</div></div>
       `;
-      div.onclick = () => openDM(u);
+      div.onclick = () => sendDM(u);
       usersListEl.appendChild(div);
     });
+  });
 
-    // if no other users, show placeholder
-    if(filtered.length === 0){
-      const p = document.createElement('div');
-      p.style.color = 'var(--muted)';
-      p.style.padding = '6px';
-      p.textContent = 'No other users online';
-      usersListEl.appendChild(p);
-    }
-  }
-
-  // add message (local render)
+  // Add message to chat
   function addMessage({from, message, self=false, privateMsg=false}) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'msg ' + (self ? 'self' : 'other');
+    const div = document.createElement("div");
+    div.className = "msg " + (self ? "self" : "other");
 
-    // meta line if other or private
-    let meta = '';
-    if(privateMsg){
-      meta = `<div class="meta">${self ? 'You (private)' : from + ' (private)'}</div>`;
-    } else {
-      meta = `<div class="meta">${self ? 'You' : from}</div>`;
-    }
+    div.innerHTML = `
+      <div class="meta">${self ? "You" : from}${privateMsg ? " (private)" : ""}</div>
+      <div>${message}</div>
+    `;
 
-    wrapper.innerHTML = meta + `<div>${escapeHtml(message)}</div>`;
-    messagesEl.appendChild(wrapper);
-    // auto scroll
-    requestAnimationFrame(() => {
-      chatArea.scrollTop = chatArea.scrollHeight;
-    });
+    messagesEl.appendChild(div);
+    chatArea.scrollTop = chatArea.scrollHeight;
   }
 
-  // escape
-  function escapeHtml(str){
-    return String(str).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]});
-  }
+  // Send public message
+  document.getElementById("sendBtn").onclick = () => {
+    const msg = messageInput.value.trim();
+    if (!msg) return;
 
-  // send normal message
-  sendBtn.onclick = sendMessage;
-  messageInput.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' && !e.shiftKey){
-      e.preventDefault();
-      sendMessage();
-    } else {
-      // emit typing
-      socket.emit('typing', { from: username, isTyping: true });
-      if(typingTimeout) clearTimeout(typingTimeout);
-      typingTimeout = setTimeout(() => {
-        socket.emit('typing', { from: username, isTyping: false });
-      }, 900);
-    }
-  });
+    addMessage({from: username, message: msg, self: true});
+    socket.emit("chatMessage", {from: username, message: msg});
 
-  function sendMessage(){
-    const text = messageInput.value.trim();
-    if(!text) return;
-    // add locally as self
-    addMessage({ from: username, message: text, self: true, privateMsg:false });
-    socket.emit('chatMessage', { from: username, message: text });
-    messageInput.value = '';
-    socket.emit('typing', { from: username, isTyping: false });
-  }
-
-  // avoid duplicate: when we receive chatMessage, ignore if from ourselves
-  socket.on('chatMessage', (data) => {
-    if(data.from === username) return; // prevent double display
-    addMessage({ from: data.from, message: data.message, self: false, privateMsg:false });
-  });
-
-  // typing indicator (show "X is typing...")
-  const typingBy = new Set();
-  socket.on('typing', ({ from, isTyping }) => {
-    if(from === username) return;
-    if(isTyping) {
-      typingBy.add(from);
-    } else {
-      typingBy.delete(from);
-    }
-    updateTyping();
-  });
-  function updateTyping(){
-    if(typingBy.size === 0){
-      typingEl.textContent = '';
-      return;
-    }
-    const arr = Array.from(typingBy).slice(0,3);
-    typingEl.textContent = arr.join(', ') + (arr.length === 1 ? ' is' : ' are') + ' typing…';
-  }
-
-  // ----- Private messaging (DM) -----
-  dmBtn.onclick = () => {
-    // open DM modal to pick user or write manual
-    modalTitle.textContent = 'Send Direct Message';
-    modalInput.value = currentDM ? `@${currentDM} ` : '';
-    showModal({
-      onOk: () => {
-        const raw = modalInput.value.trim();
-        // if user typed "@name message" we parse
-        let to = currentDM;
-        let message = raw;
-        if(raw.startsWith('@')) {
-          const firstSpace = raw.indexOf(' ');
-          if(firstSpace > 1) {
-            to = raw.substring(1, firstSpace);
-            message = raw.substring(firstSpace+1);
-          } else {
-            alert('Use format: @username message OR select a user from left to DM');
-            return;
-          }
-        }
-        if(!to || !message) { alert('Recipient and message required'); return; }
-
-        // local echo (private)
-        addMessage({ from: username, message: message, self: true, privateMsg: true });
-
-        socket.emit('privateMessage', { to, from: username, message });
-        hideModal();
-      }
-    });
+    messageInput.value = "";
   };
 
-  // open DM when clicking user
-  function openDM(user){
-    currentDM = user;
-    modalTitle.textContent = `DM to ${user}`;
-    modalInput.value = '';
-    showModal({
-      onOk: () => {
-        const message = modalInput.value.trim();
-        if(!message) return;
-        addMessage({ from: username, message, self: true, privateMsg: true });
-        socket.emit('privateMessage', { to: user, from: username, message });
-        hideModal();
-      }
-    });
-  }
-
-  socket.on('privateMessage', (data) => {
-    // show private message from data.from
-    addMessage({ from: data.from, message: data.message, self: false, privateMsg: true });
+  // Receive public message
+  socket.on("chatMessage", data => {
+    if (data.from !== username) addMessage(data);
   });
 
-  socket.on('privateSent', (d) => {
-    // optional: show small toast (kept simple)
-    // console.log('private to', d.to);
-  });
-
-  socket.on('userOffline', (name) => {
-    alert(name + ' is offline/unavailable');
-  });
-
-  // ----- One-time message -----
-  // To send one-time: open modal similar to DM, but emit oneTimeMessage
-  function openOneTime(user){
-    currentDM = user;
-    modalTitle.textContent = `Send one-time message to ${user}`;
-    modalInput.value = '';
-    showModal({
-      onOk: () => {
-        const message = modalInput.value.trim();
-        if(!message) return;
-        socket.emit('oneTimeMessage', { to: user, from: username, message });
-        hideModal();
-        addMessage({ from: username, message: '(secret sent)', self: true, privateMsg:true });
-      }
-    }, { okLabel: 'Send Secret' });
-  }
-
-  // quick way: long-press on user? for simplicity, allow shift-click on left user to send one-time
-  usersListEl.addEventListener('click', (ev) => {
-    // handled by user onclick for DM; to handle one-time via shift-click, check event
-  });
-
-  // handle incoming one-time message: show modal with content and destroy after close
-  socket.on('oneTimeMessage', (data) => {
-    // show content in oneModal and display
-    oneContent.textContent = `${data.from}: ${data.message}`;
-    oneBackdrop.style.display = 'flex';
-    // note: do not store locally — one-time only
-  });
-
-  oneClose.onclick = () => {
-    oneBackdrop.style.display = 'none';
-    oneContent.textContent = '';
-    // message destroyed on close — no further action
+  // Typing indicator
+  messageInput.oninput = () => {
+    socket.emit("typing", {from: username, isTyping: true});
+    clearTimeout(window._t);
+    window._t = setTimeout(() => {
+      socket.emit("typing", {from: username, isTyping: false});
+    }, 800);
   };
 
-  // modal helpers
-  function showModal({ onOk }, opts = {}) {
-    backdrop.style.display = 'flex';
-    modalInput.focus();
-    modalOk.onclick = () => onOk && onOk();
-    modalCancel.onclick = hideModal;
-    // allow closing with Esc
-    document.onkeydown = (ev) => {
-      if(ev.key === 'Escape') hideModal();
-    };
-    if(opts.okLabel) modalOk.textContent = opts.okLabel; else modalOk.textContent = 'Send';
-  }
-  function hideModal() {
-    backdrop.style.display = 'none';
-    modalInput.value = '';
-    document.onkeydown = null;
-  }
-
-  // simple UX: allow clicking username in header to copy
-  document.getElementById('roomTitle').addEventListener('click', () => {
-    navigator.clipboard?.writeText(window.location.href).catch(()=>{});
+  socket.on("typing", ({from, isTyping}) => {
+    if (from === username) return;
+    typingEl.textContent = isTyping ? `${from} is typing...` : "";
   });
 
-  // keep UI consistent across browsers: force reflow on resize (small trick)
-  window.addEventListener('resize', () => {
-    document.body.offsetHeight; // no-op reflow
+  // Direct message
+  function sendDM(toUser) {
+    const msg = prompt(`DM to ${toUser}:`);
+    if (!msg) return;
+
+    addMessage({from: username, message: msg, self: true, privateMsg:true});
+    socket.emit("privateMessage", {to: toUser, from: username, message: msg});
+  }
+
+  socket.on("privateMessage", (data) => {
+    addMessage({from: data.from, message: data.message, privateMsg:true});
   });
 
-  // initial focus
-  messageInput.focus();
 </script>
 
 </body>
